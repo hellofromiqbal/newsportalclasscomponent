@@ -23,7 +23,6 @@ export default class AppNavbar extends Component {
                   type="text"
                   placeholder="Search"
                   className=" mr-sm-2"
-                  onChange={(e) => this.props.handleSearch(e.target.value)}
                 />
               </Col>
               <Col xs="auto">

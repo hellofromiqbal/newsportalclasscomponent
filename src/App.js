@@ -14,11 +14,6 @@ export default class App extends Component {
     };
   };
 
-  searchArticles(keyword) {
-    console.log(keyword);
-    // this.setState({ keyword: keyword });
-  };
-
   fetchArticles(keyword) {
     fetch(`${this.apiUrl}?q=${keyword}&apiKey=${this.apiKey}`)
       .then(res => res.json())
@@ -35,7 +30,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppNavbar handleSearch={this.searchArticles}/>
+        <AppNavbar/>
         <MainPage currentSearch={this.state.keyword} articles={this.state.articles}/>
       </div>
     );

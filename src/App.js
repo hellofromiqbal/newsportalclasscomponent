@@ -14,8 +14,13 @@ export default class App extends Component {
     };
   };
 
-  fetchArticles() {
-    fetch(`${this.apiUrl}?q=${this.state.keyword}&apiKey=${this.apiKey}`)
+  searchArticles(keyword) {
+    console.log(keyword);
+    // this.setState({ keyword: keyword });
+  };
+
+  fetchArticles(keyword) {
+    fetch(`${this.apiUrl}?q=${keyword}&apiKey=${this.apiKey}`)
       .then(res => res.json())
       .then(data => {
         const articles = data.articles.splice(0, 10);
@@ -23,13 +28,8 @@ export default class App extends Component {
       });
   };
 
-  searchArticles(keyword) {
-    console.log(keyword);
-    // this.setState({ keyword: keyword });
-  };
-
   componentDidMount() {
-    this.fetchArticles();
+    this.fetchArticles(this.state.keyword);
   };
   
   render() {

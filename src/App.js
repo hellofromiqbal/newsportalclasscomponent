@@ -1,3 +1,4 @@
+// App.jsx
 import './App.css';
 import React, { Component } from 'react';
 import AppNavbar from './components/Navbar';
@@ -18,9 +19,18 @@ export default class App extends Component {
     fetch(`${this.apiUrl}?q=${keyword}&apiKey=${this.apiKey}`)
       .then(res => res.json())
       .then(data => {
-        const articles = data.articles.splice(0, 10);
+        const articles = (data.articles || []).slice(0, 10);
         this.setState({ articles: articles });
+      })
+      .catch(error => {
+        console.error('Error fetching articles', error);
       });
+  };
+
+  searchArticles(newKeyword) {
+    this.setState({ keyword: newKeyword }, () => {
+      this.fetchArticles(newKeyword);
+    });
   };
 
   componentDidMount() {
@@ -30,7 +40,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppNavbar/>
+        <AppNavbar handleSearch={(newKeyword) => this.searchArticles(newKeyword)}/>
         <MainPage currentSearch={this.state.keyword} articles={this.state.articles}/>
       </div>
     );

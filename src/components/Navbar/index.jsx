@@ -8,6 +8,22 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 export default class AppNavbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchInput: ''
+    };
+  };
+
+  handleInputChange = (e) => {
+    let newKeyword = e.target.value;
+    if(newKeyword.length < 1) {
+      newKeyword = 'keyword';
+    }
+    this.setState({ searchInput: newKeyword });
+    this.props.handleSearch(newKeyword);
+  }
+
   render() {
     return (
       <Navbar expand="lg" bg="dark" data-bs-theme="dark">
@@ -23,6 +39,7 @@ export default class AppNavbar extends Component {
                   type="text"
                   placeholder="Search"
                   className=" mr-sm-2"
+                  onChange={(e) => this.handleInputChange(e)}
                 />
               </Col>
               <Col xs="auto">

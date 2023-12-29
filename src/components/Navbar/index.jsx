@@ -22,7 +22,11 @@ export default class AppNavbar extends Component {
     }
     this.setState({ searchInput: newKeyword });
     this.props.handleSearch(newKeyword);
-  }
+  };
+
+  handleSubmitButtonClick = () => {
+    this.props.handleSearch(this.state.searchInput);
+  };
 
   render() {
     return (
@@ -36,14 +40,17 @@ export default class AppNavbar extends Component {
             <Row>
               <Col xs="auto">
                 <Form.Control
-                  type="text"
+                  type="search"
                   placeholder="Search"
                   className=" mr-sm-2"
                   onChange={(e) => this.handleInputChange(e)}
                 />
               </Col>
               <Col xs="auto">
-                <Button type="submit">Submit</Button>
+                <Button
+                  type="submit"
+                  onClick={this.handleSubmitButtonClick}
+                >Search</Button>
               </Col>
             </Row>
           </div>
